@@ -13,7 +13,7 @@ public Blog getBlog(int blogId);
 public List<Blog> getBlogs();
 public boolean incrementLikes(int blogId);
 public boolean incrementDislikes(int blogId);
-public boolean approveBlog(int blogId);
-public boolean rejectBlog(int blogId);
+public boolean approveBlog(Blog blog);
+public boolean rejectBlog(Blog blog);
 
 }

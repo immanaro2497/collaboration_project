@@ -100,10 +100,9 @@ public class BlogDAOImpl implements BlogDAO {
 	}
 
 	@Override
-	public boolean approveBlog(int blogId) {
+	public boolean approveBlog(Blog blog) {
 	
 		try {
-			Blog blog=getBlog(blogId);
 			blog.setStatus("A");
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
@@ -114,10 +113,9 @@ public class BlogDAOImpl implements BlogDAO {
 	}
 
 	@Override
-	public boolean rejectBlog(int blogId) {
+	public boolean rejectBlog(Blog blog) {
 		
 		try {
-			Blog blog=getBlog(blogId);
 			blog.setStatus("NA");
 			sessionFactory.getCurrentSession().update(blog);
 			return true;

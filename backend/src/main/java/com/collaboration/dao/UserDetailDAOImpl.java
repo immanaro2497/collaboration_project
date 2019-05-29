@@ -20,10 +20,10 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	SessionFactory sessionFactory;
 	
 	@Override
-	public boolean addUser(UserDetail user) {
+	public boolean addUser(UserDetail userDetail) {
 	
 		try {
-			sessionFactory.getCurrentSession().save(user);
+			sessionFactory.getCurrentSession().save(userDetail);
 			return true;
 		}
 		catch(Exception e) {
@@ -48,10 +48,10 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	}
 
 	@Override
-	public boolean updateUser(UserDetail user) {
+	public boolean updateUser(UserDetail userDetail) {
 	    
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(user);
+			sessionFactory.getCurrentSession().saveOrUpdate(userDetail);
 			return true;
 		}
 		catch(Exception e) {

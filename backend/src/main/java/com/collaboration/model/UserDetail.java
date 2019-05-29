@@ -12,7 +12,7 @@ private String firstname;
 private String lastname;
 private String password;
 private String emailId;
-private String role="ROLE_USER";
+private String role;
 private String status;
 private String isOnline;
 

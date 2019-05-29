@@ -71,10 +71,9 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 	
 	@Override
-	public boolean approveForum(int forumId) {
+	public boolean approveForum(Forum forum) {
 	
 		try {
-			Forum forum=getForum(forumId);
 			forum.setStatus("A");
 			sessionFactory.getCurrentSession().update(forum);
 			return true;
@@ -85,10 +84,9 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 
 	@Override
-	public boolean rejectForum(int forumId) {
+	public boolean rejectForum(Forum forum) {
 		
 		try {
-			Forum forum=getForum(forumId);
 			forum.setStatus("NA");
 			sessionFactory.getCurrentSession().update(forum);
 			return true;

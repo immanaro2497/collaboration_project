@@ -62,11 +62,13 @@ public class ForumDAOTest {
 	@Ignore
 	@Test
 	public void approveforumtest() {
-		assertTrue("problem in incrementing likes",forumDAO.approveForum(503));
+		Forum forum=forumDAO.getForum(502);
+		assertTrue("problem in incrementing likes",forumDAO.approveForum(forum));
 	}
 	@Ignore
 	@Test
 	public void rejectforumtest() {
-		assertTrue("problem in incrementing likes",forumDAO.rejectForum(503));
+		Forum forum=forumDAO.getForum(502);
+		assertTrue("problem in incrementing likes",forumDAO.rejectForum(forum));
 	}
 }

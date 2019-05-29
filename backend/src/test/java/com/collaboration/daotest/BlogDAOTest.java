@@ -61,20 +61,26 @@ public class BlogDAOTest {
 			System.out.println("id:"+blog.getBlogId());
 		}
 	}
+	
 	@Test
 	public void incrementlikestest() {
 		assertTrue("problem in incrementing likes",blogDAO.incrementLikes(503));
 	}
+	@Ignore
 	@Test
 	public void incrementdislikestest() {
 		assertTrue("problem in incrementing likes",blogDAO.incrementDislikes(503));
 	}
+	@Ignore
 	@Test
 	public void approveblogtest() {
-		assertTrue("problem in incrementing likes",blogDAO.approveBlog(501));
+		Blog blog=blogDAO.getBlog(501);
+		assertTrue("problem in incrementing likes",blogDAO.rejectBlog(blog));
 	}
+	@Ignore
 	@Test
 	public void rejectblogtest() {
-		assertTrue("problem in incrementing likes",blogDAO.rejectBlog(503));
+		Blog blog=blogDAO.getBlog(503);
+		assertTrue("problem in incrementing likes",blogDAO.approveBlog(blog));
 	}
 }

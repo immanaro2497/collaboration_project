@@ -6,9 +6,9 @@ import com.collaboration.model.UserDetail;
 
 public interface UserDetailDAO {
 
-public boolean addUser(UserDetail user);
+public boolean addUser(UserDetail userDetail);
 public UserDetail getUser(String username);
-public boolean updateUser(UserDetail user);
+public boolean updateUser(UserDetail userDetail);
 public List<UserDetail> getUsers();
 public boolean checkUser(String username,String password);
 	

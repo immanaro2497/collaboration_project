@@ -28,12 +28,12 @@ public class UserDetailDAOTest {
 	@Ignore
 	@Test
 	public void addusertest() {
-		UserDetail user=new UserDetail();
-		user.setUsername("immadmin");
-		user.setFirstname("immanuel");
-		user.setPassword("immadmin");
-		user.setEmailId("immadmin@gmail.com");
-		assertTrue("problem in adding user",userdetailDAO.addUser(user));
+		UserDetail userDetail=new UserDetail();
+		userDetail.setUsername("immadmin");
+		userDetail.setFirstname("immanuel");
+		userDetail.setPassword("immadmin");
+		userDetail.setEmailId("immadmin@gmail.com");
+		assertTrue("problem in adding user",userdetailDAO.addUser(userDetail));
 	}
 	@Ignore
 	@Test
@@ -43,18 +43,19 @@ public class UserDetailDAOTest {
 
 	@Test
 	public void updateusertest() {
-		UserDetail user=userdetailDAO.getUser("imman");
-		user.setFirstname("imman");
-		assertTrue("problem in updating user",userdetailDAO.updateUser(user));
+		UserDetail userDetail=userdetailDAO.getUser("imman");
+		userDetail.setFirstname("imman");
+		assertTrue("problem in updating user",userdetailDAO.updateUser(userDetail));
 	}
-	@Ignore
+	
 	@Test
 	public void listusertest() {
 		List<UserDetail> listUsers=userdetailDAO.getUsers();
-		for(UserDetail user:listUsers) {
-			System.out.println("username:"+user.getUsername());
+		for(UserDetail userDetail:listUsers) {
+			System.out.println("username:"+userDetail.getUsername());
 		}
 	}
+	@Ignore
 	@Test
 	public void checkusertest() {
 		assertTrue("problem in checking user",userdetailDAO.checkUser("imman","imman"));

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Blog {
 	
@@ -18,6 +20,7 @@ private int blogId;
 private String blogName;
 private String blogContent;
 private String username;
+@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-mm-yyyy")
 private Date createDate;
 private String status;
 private int likes;
