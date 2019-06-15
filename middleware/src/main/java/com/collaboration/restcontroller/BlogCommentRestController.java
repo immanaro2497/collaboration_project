@@ -53,11 +53,9 @@ public class BlogCommentRestController {
 		}
 	}
 	
-	@PostMapping("/updateBlogComment/{commentId}")
-	public ResponseEntity<String> updateBlogComment(@PathVariable("commentId") int commentId)
+	@PostMapping("/updateBlogComment")
+	public ResponseEntity<String> updateBlogComment(@RequestBody BlogComment blogcomment)
 	{
-		BlogComment blogcomment=blogcommentDAO.getBlogComment(commentId);
-		blogcomment.setBlogComment("new Blog");
 		if(blogcommentDAO.updateBlogComment(blogcomment)) 
 		{
 			return new ResponseEntity<String>("BlogComment updated",HttpStatus.OK);

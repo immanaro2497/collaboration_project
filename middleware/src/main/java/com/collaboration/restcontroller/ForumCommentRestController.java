@@ -53,11 +53,9 @@ public class ForumCommentRestController {
 		}
 	}
 	
-	@PostMapping("/updateForumComment/{commentId}")
-	public ResponseEntity<String> updateForumComment(@PathVariable("commentId") int commentId)
+	@PostMapping("/updateForumComment")
+	public ResponseEntity<String> updateForumComment(@RequestBody ForumComment forumcomment)
 	{
-		ForumComment forumcomment=forumcommentDAO.getForumComment(commentId);
-		forumcomment.setForumComment("new Forum");
 		if(forumcommentDAO.updateForumComment(forumcomment)) 
 		{
 			return new ResponseEntity<String>("ForumComment updated",HttpStatus.OK);

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collaboration.dao.JobDAO;
@@ -36,4 +38,30 @@ public class JobRestController {
 		Job job=jobDAO.getJob(jobId);
 		return new ResponseEntity<Job>(job,HttpStatus.OK);
 	}
+	@PostMapping("/addJob")
+	public ResponseEntity<String> addJob(@RequestBody Job job)
+	{
+		if(jobDAO.addJob(job))
+		{
+			return new ResponseEntity<String>("Job added",HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<String>("Error adding job",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@GetMapping("/deleteJob/{jobId}")
+	public ResponseEntity<String> deleteJob(@PathVariable("jobId") int jobId)
+	{
+		Job job=jobDAO.getJob(jobId);
+		if(jobDAO.deleteJob(job)) 
+		{
+			return new ResponseEntity<String>("Job deleted",HttpStatus.OK);
+		}
+		else 
+		{
+			return new ResponseEntity<String>("Error deleting job",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+		
 }
