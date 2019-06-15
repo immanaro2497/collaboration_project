@@ -1,0 +1,12 @@
+<div ng-controller="FriendController">
+<div ng-repeat="friend in showFriends">
+<div ng-show="currentUser.username==friend.username">
+<img src="http://localhost:8080/middleware/getImage/{{friend.friendusername}}" width="20px" height="20px">
+{{friend.friendFirstName}}
+</div>
+<div ng-show="currentUser.username==friend.friendusername">
+<img src="http://localhost:8080/middleware/getImage/{{friend.username}}" width="20px" height="20px">
+{{friend.friendFirstName}}
+</div>
+</div>
+</div>
