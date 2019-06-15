@@ -60,17 +60,17 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 	}
 
 	@Override
-	public boolean checkUser(String username,String password) {
+	public UserDetail checkUser(UserDetail userDetail) {
 
 		Session session=sessionFactory.openSession();
 		Query query=session.createQuery("from UserDetail where username=:uname and password=:pword");
-		query.setParameter("uname", username);
-		query.setParameter("pword",password);
-		List<UserDetail> list=query.list();
-		if(list!=null && !list.isEmpty()) {
-			return true;
+		query.setParameter("uname", userDetail.getUsername());
+		query.setParameter("pword",userDetail.getPassword());
+		List<UserDetail> listUsers=query.list();
+		if(listUsers!=null) {
+			return listUsers.get(0);
 		}
-		return false;
+		return null;
 	}
 
 }

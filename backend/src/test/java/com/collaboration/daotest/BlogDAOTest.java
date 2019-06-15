@@ -64,12 +64,12 @@ public class BlogDAOTest {
 	
 	@Test
 	public void incrementlikestest() {
-		assertTrue("problem in incrementing likes",blogDAO.incrementLikes(503));
+		assertTrue("problem in incrementing likes",blogDAO.incrementLikes(501));
 	}
 	@Ignore
 	@Test
 	public void incrementdislikestest() {
-		assertTrue("problem in incrementing likes",blogDAO.incrementDislikes(503));
+		assertTrue("problem in incrementing likes",blogDAO.incrementDislikes(501));
 	}
 	@Ignore
 	@Test

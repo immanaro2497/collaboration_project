@@ -40,14 +40,14 @@ public class UserDetailDAOTest {
 	public void getusertest() {
 		assertNotNull("problem in getting user",userdetailDAO.getUser("imman"));
 	}
-
+	@Ignore
 	@Test
 	public void updateusertest() {
 		UserDetail userDetail=userdetailDAO.getUser("imman");
 		userDetail.setFirstname("imman");
 		assertTrue("problem in updating user",userdetailDAO.updateUser(userDetail));
 	}
-	
+	@Ignore
 	@Test
 	public void listusertest() {
 		List<UserDetail> listUsers=userdetailDAO.getUsers();
@@ -55,10 +55,12 @@ public class UserDetailDAOTest {
 			System.out.println("username:"+userDetail.getUsername());
 		}
 	}
-	@Ignore
+	
 	@Test
 	public void checkusertest() {
-		assertTrue("problem in checking user",userdetailDAO.checkUser("imman","imman"));
+		UserDetail userDetail=userdetailDAO.getUser("ravi");
+		System.out.println("username:"+userDetail.getUsername());
+		assertNotNull("problem in checking user",userdetailDAO.checkUser(userDetail));
 	}
 	
 }

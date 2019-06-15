@@ -12,6 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.collaboration.dao.FriendDAO;
 import com.collaboration.model.Friend;
+import com.collaboration.model.UserDetail;
 
 public class FriendDAOTest {
 
@@ -26,30 +27,53 @@ public class FriendDAOTest {
 	}
 	@Ignore
 	@Test
-	public void addfriendtest() {
+	public void sendfriendrequesttest() {
 		Friend friend=new Friend();
-		friend.setFriendName("immanuel");
+		friend.setFriendFirstName("immanuel");
+		friend.setFriendLastName("imm");
 		friend.setFriendusername("imman");
 		friend.setUsername("immadmin");
 		friend.setStatus("NA");
-		assertTrue("problem in adding friend",friendDAO.addFriend(friend));
+		assertTrue("problem in adding friend",friendDAO.sendFriendRequest(friend));
 	}
 	@Ignore
 	@Test
 	public void getfriendtest() {
-		assertNotNull("problem in getting user",friendDAO.getFriend(501));
+		assertNotNull("problem in getting user",friendDAO.getFriend(521));
 	}
-
+	@Ignore
 	@Test
-	public void deletefriendtest() {
-		Friend friend=friendDAO.getFriend(502);
-		assertTrue("problem in adding friend",friendDAO.deleteFriend(friend));
+	public void acceptfriendrequesttest() {
+		Friend friend=friendDAO.getFriend(521);
+		assertTrue("problem in adding friend",friendDAO.acceptFriendRequest(friend));
 	}
+    @Ignore
 	@Test
-	public void getfriendstest() {
-		List<Friend> listFriends=friendDAO.getFriends("immadmin");
+	public void deletefriendrequesttest() {
+		Friend friend=friendDAO.getFriend(523);
+		assertTrue("problem in adding friend",friendDAO.deleteFriendRequest(friend));
+	}
+    @Ignore
+	@Test
+	public void showfriendlisttest() {
+		List<Friend> listFriends=friendDAO.showFriendList("immadmin");
 		for(Friend friend:listFriends) {
-			System.out.println("friendname:"+friend.getFriendName());
+			System.out.println("username:"+friend.getFriendusername());
+		}
+	}
+	@Ignore
+	@Test
+	public void showpendingfriendrequesttest() {
+		List<Friend> listFriends=friendDAO.showPendingFriendRequest("immadmin");
+		for(Friend friend:listFriends) {
+			System.out.println("username:"+friend.getFriendusername());
+		}
+	}
+	@Test
+	public void showsuggestedfriendstest() {
+		List<UserDetail> listUsers=friendDAO.showSuggestedFriends("immadmin");
+		for(UserDetail userDetail:listUsers) {
+			System.out.println("username:"+userDetail.getUsername());
 		}
 	}
 }

@@ -20,7 +20,7 @@ private int blogId;
 private String blogName;
 private String blogContent;
 private String username;
-@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-mm-yyyy")
+@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
 private Date createDate;
 private String status;
 private int likes;

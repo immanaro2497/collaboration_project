@@ -1,5 +1,6 @@
 package com.collaboration.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.collaboration.model.Friend;
+import com.collaboration.model.UserDetail;
 
 @Repository("friendDAO")
 @Transactional
@@ -19,29 +21,6 @@ public class FriendDAOImpl implements FriendDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	@Override
-	public boolean addFriend(Friend friend) {
-		
-		try {
-			sessionFactory.getCurrentSession().save(friend);
-			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean deleteFriend(Friend friend) {
-	
-		try {
-			sessionFactory.getCurrentSession().delete(friend);
-			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}
-	}
 
 	@Override
 	public Friend getFriend(int friendid) {
@@ -52,12 +31,77 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public List<Friend> getFriends(String username) {
+	public List<Friend> showFriendList(String username) {
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Friend where username=:uname");
+		Query query=session.createQuery("from Friend where (username=:uname or friendusername=:funame) and status='A'");
+		query.setParameter("uname",username);
+		query.setParameter("funame",username);
+		List<Friend> listFriends=query.list();
+		return listFriends;
+	}
+	
+	@Override
+	public List<Friend> showPendingFriendRequest(String username) {
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from Friend where username=:uname and status='NA'");
 		query.setParameter("uname",username);
 		List<Friend> listFriends=query.list();
 		return listFriends;
 	}
+	
+	@Override
+	public List<UserDetail> showSuggestedFriends(String username) {
+		Session session=sessionFactory.openSession();
+		Query query=session.createNativeQuery("select username from userdetail where username not in (select friendusername from friend where username='"+username+"') and username not in (select username from friend where friendusername='"+username+"' and status='A') and username!='"+username+"'");
+        List<String> userList=query.list();	
+        ArrayList<UserDetail> userDetailList=new ArrayList<UserDetail>();
+        int i=0;
+        while(i<userList.size())
+        {
+        	UserDetail user=session.get(UserDetail.class,userList.get(i).toString().trim());
+        	userDetailList.add(user);
+        	i++;
+        }
+        return userDetailList;
+	}
+	
+	@Override
+	public boolean sendFriendRequest(Friend friend) {
+		
+		try {
+			friend.setStatus("NA");
+			sessionFactory.getCurrentSession().save(friend);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean acceptFriendRequest(Friend friend) {
+		
+		try {
+			friend.setStatus("A");
+			sessionFactory.getCurrentSession().update(friend);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteFriendRequest(Friend friend) {
+	
+		try {
+			sessionFactory.getCurrentSession().delete(friend);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+
 
 }
